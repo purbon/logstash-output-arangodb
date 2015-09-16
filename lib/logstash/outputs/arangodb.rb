@@ -33,13 +33,13 @@ class LogStash::Outputs::ArangoDB < LogStash::Outputs::Base
 
   def receive(event)
     return unless output?(event)
-    collection.create_document(event.to_hash)
+    collection(event).create_document(event.to_hash)
   end
 
   private
 
-  def collection
-    @instance ||= @database[@collection]
+  def collection(event)
+    @database[event.sprintf(@collection)]
   end
 
 end
