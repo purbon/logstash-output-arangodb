@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 require "logstash/plugin"
 require "logstash/json"
 
@@ -6,7 +6,10 @@ describe LogStash::Outputs::ArangoDB do
 
   context "registration" do
 
-    let(:output) { LogStash::Plugin.lookup("output", "arangodb").new() }
+    let(:config) do
+      { "username" => "logstash", "password" => "logstash" }
+    end
+    let(:output) { LogStash::Plugin.lookup("output", "arangodb").new(config) }
 
     it "should register" do
       expect { output.register }.to_not raise_error
