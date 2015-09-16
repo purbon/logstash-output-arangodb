@@ -12,6 +12,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+require 'bundler/gem_tasks'
 require 'rspec'
 require 'rspec/core/rake_task'
 
